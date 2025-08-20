@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Coupon for Bidya 💝</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
@@ -14,6 +15,7 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
+      flex-direction: column;
     }
 
     .message {
@@ -33,14 +35,16 @@
 
     /* Coupon as ticket */
     .coupon {
-      display: none; /* hidden until typing finishes */
+      display: none; /* ✅ hidden until typing finishes */
       width: 600px;
+      max-width: 95%; /* scale on small screens */
       background: #fff;
       border-radius: 15px;
       box-shadow: 0 8px 25px rgba(0,0,0,0.2);
       overflow: hidden;
       position: relative;
       animation: popUp 0.8s ease;
+      flex-direction: row;
     }
 
     @keyframes popUp {
@@ -121,6 +125,40 @@
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.3); }
     }
+
+    /* 📱 Mobile Responsive Styles */
+    @media (max-width: 600px) {
+      .coupon {
+        flex-direction: column; /* stack left and right */
+        width: 90%;
+      }
+
+      .left {
+        width: 100%;
+        padding: 15px;
+      }
+
+      .right {
+        padding: 20px;
+      }
+
+      .left h3 {
+        font-size: 1rem;
+      }
+
+      .right h2 {
+        font-size: 1.2rem;
+      }
+
+      .offer {
+        font-size: 1rem;
+        padding: 12px;
+      }
+
+      .message {
+        font-size: 1.5rem; /* smaller intro message */
+      }
+    }
   </style>
 </head>
 <body>
@@ -141,7 +179,6 @@
       <div class="offer">✨ A trip, just you & me 💕</div>
       <div class="offer">🍰 Baking a cake together</div>
       <div class="offer">🥮 Butterscotch pastry date</div>
-
     </div>
   </div>
 
@@ -159,7 +196,8 @@
         // after typing done, wait a sec then show coupon
         setTimeout(() => {
           messageEl.style.display = "none";
-          document.getElementById("coupon").style.display = "flex";
+          const couponEl = document.getElementById("coupon");
+          couponEl.style.display = "flex";
         }, 800);
       }
     }
